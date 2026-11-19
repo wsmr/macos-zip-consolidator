@@ -8,6 +8,21 @@
 
 An AppleScript (`.scpt`) for **[FastScripts](https://red-sweater.com/fastscripts/)** (also runs from Script Editor) that detects, extracts, verifies and merges ZIP archives into a single folder, and tells you **exactly which files are damaged or missing** so you only re-download those.
 
+### Repo Tree
+macos-zip-consolidator/
+├── README.md                 full docs: problem, features, install, usage, limits
+├── LICENSE                   MIT (c) 2026 wsmr
+├── CHANGELOG.md              v1.0.0 release notes
+├── CONTRIBUTING.md           workflow and rules for contributors
+├── .gitignore
+├── dist/Extract_Consolidate_ZIPs.scpt    the script users download
+├── src/worker.sh                         shell engine (the real logic)
+├── src/wrapper.applescript.tpl           AppleScript UI (dialogs, Finder, progress)
+├── build/build.py                        embeds the engine into the .scpt
+├── tests/run_tests.sh                    13 self-tests (all pass here)
+├── docs/TROUBLESHOOTING.md               symptom -> fix table
+└── .github/                              bug and feature issue templates, CI workflow
+
 ---
 
 ## The problem it solves
