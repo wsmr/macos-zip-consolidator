@@ -1,0 +1,30 @@
+name: tests
+on: [push, pull_request]
+jobs:
+  engine:
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macos-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install tools (Linux)
+        if: runner.os == 'Linux'
+        run: sudo apt-get update && sudo apt-get install -y p7zip-full zip
+      - name: Install tools (macOS)
+        if: runner.os == 'macOS'
+        run: brew install sevenzip
+      - name: Shell syntax
+        run: bash -n src/worker.sh
+      - name: Self-test
+        run: bash tests/run_tests.sh
+      - name: dist/ is up to date
+        run: |
+          python3 build/build.py
+          git diff --exit-code dist/
+  applescript-compile:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Compile the AppleScript (syntax check)
+        run: osacompile -o /tmp/Extract_Consolidate_ZIPs.compiled.scpt dist/Extract_Consolidate_ZIPs.scpt

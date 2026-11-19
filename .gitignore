@@ -1,0 +1,9 @@
+.DS_Store
+*.log
+/tmp/
+# local test output / reports
+Consolidated_Extracted/
+issue_files_name_with_path*.txt
+.completed_archives.txt
+.extract_staging_*/
+__pycache__/
